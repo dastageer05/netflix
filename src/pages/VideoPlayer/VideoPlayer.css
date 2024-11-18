@@ -1,0 +1,34 @@
+.preview-container {
+  position: relative;
+  width: 100%; /* Adjust to your needs */
+  height: 900px; /* Adjust to your needs */
+  overflow: hidden;
+  cursor: pointer;
+}
+
+.thumbnail,
+.preview-video {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: opacity 0.3s ease;
+}
+
+.thumbnail {
+  opacity: 1;
+}
+
+.preview-video {
+  opacity: 0;
+}
+
+.preview-container:hover .thumbnail {
+  opacity: 0;
+}
+
+.preview-container:hover .preview-video {
+  opacity: 1;
+}
