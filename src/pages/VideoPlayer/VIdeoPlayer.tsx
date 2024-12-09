@@ -1,6 +1,5 @@
 import React, { useRef, useState, useEffect } from "react";
 import "./VideoPlayer.css"; // Add your styles here
-// import { Link } from "react-router-dom";
 import play_icon from "../../assets/play_icon.png";
 import info_icon from "../../assets/info_icon.png";
 
@@ -11,11 +10,40 @@ interface Card {
   [key: string]: any;
 }
 
-const VideoPlayer: React.FC<Card> = ({ backdrop_path, title, overview }) => {
+const VideoPlayer: React.FC<Card> = ({
+  backdrop_path,
+  title,
+  overview,
+  id,
+}) => {
   const videoRef = useRef<HTMLVideoElement | null>(null);
   const [isHovered, setIsHovered] = useState(false);
 
+  // const [videoDetail, setVDetail] = useState({
+  //   name: "",
+  //   key: "",
+  //   published_at: "",
+  //   type: "",
+  // });
+
   const videoSrc = "https://www.w3schools.com/html/mov_bbb.mp4";
+  // const options = {
+  //   method: "GET",
+  //   headers: {
+  //     accept: "application/json",
+  //     Authorization: `Bearer YOUR_API_KEY`,
+  //   },
+  // };
+  // useEffect(() => {
+  //   fetch(
+  //     `https://api.themoviedb.org/3/movie/${id}/videos?language=en-US`,
+  //     options
+  //   )
+  //     .then((res) => res.json())
+  //     .then((res) => setVDetail(res.results[0]))
+  //     .catch((err) => console.error(err));
+  // }, [id]);
+  // const videoSrc = `https://api.themoviedb.org/3/movie/${id}/videos?language=en-US`;
 
   const handleMouseEnter = () => {
     setIsHovered(true);
@@ -32,7 +60,7 @@ const VideoPlayer: React.FC<Card> = ({ backdrop_path, title, overview }) => {
 
   return (
     <div
-      className="preview-container"
+      className="preview-container w-full"
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
     >
@@ -46,16 +74,6 @@ const VideoPlayer: React.FC<Card> = ({ backdrop_path, title, overview }) => {
             onMouseEnter={handleMouseEnter}
             onMouseLeave={handleMouseLeave}
           >
-            <video
-              className="preview-video"
-              muted
-              preload="auto"
-              ref={videoRef}
-              src={videoSrc}
-              autoPlay
-              loop
-            />
-
             <div className="slide-content">
               <h1>{title}</h1>
               <p>{overview}</p>
@@ -73,13 +91,29 @@ const VideoPlayer: React.FC<Card> = ({ backdrop_path, title, overview }) => {
           </div>
         </>
       )}
-      <video
-        className="preview-video"
-        ref={videoRef}
-        muted
-        preload="none"
-        src={videoSrc}
-      />
+      <div className="slide">
+        <video
+          className="preview-video"
+          ref={videoRef}
+          muted
+          preload="none"
+          src={videoSrc}
+        />
+        <div className="slide-content">
+          <h1>{title}</h1>
+          <p>{overview}</p>
+          <div className="hero-btns">
+            <button className="btn">
+              <img src={play_icon} alt="Play" />
+              Play
+            </button>
+            <button className="btn dark-btn">
+              <img src={info_icon} alt="More Info" />
+              More Info
+            </button>
+          </div>
+        </div>
+      </div>
     </div>
   );
 };

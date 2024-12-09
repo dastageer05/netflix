@@ -58,7 +58,7 @@ const TitleCards: React.FC<TitleCardType> = ({
         cardsElement.removeEventListener("wheel", handleWheel);
       }
     };
-  }, []);
+  }, [category]);
 
   return (
     <div className="titlecards">

@@ -1,28 +1,45 @@
+import React, { useState, useEffect } from "react";
 import Navbar from "../../components/Navbar/Navbar";
 import "./Home.css";
-import hero_banner from "../../assets/hero_banner.jpg";
-import hero_title from "../../assets/hero_title.png";
-import play_icon from "../../assets/play_icon.png";
-import info_icon from "../../assets/info_icon.png";
 import TitleCards from "../../components/TitleCards/TitleCards";
 import Footer from "../../components/Footer/Footer";
-import VideoPlayer from "../VideoPlayer/VIdeoPlayer";
-import VP from "../VideoPlayer/Test2";
+import Slides from "../VideoPlayer/Slides";
 const Home = () => {
-  const imgUrl = "https://via.placeholder.com/1920x1080";
+  const [showSplash, setShowSplash] = useState(true);
 
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setShowSplash(false); // Hide splash screen after video ends
+    }, 4000); // Adjust time to match your video length
+
+    return () => clearTimeout(timer); // Cleanup the timer
+  }, []);
   return (
-    <div className="home">
-      <Navbar />
-      <VP />
-      <div className="more-cards">
-        <TitleCards title="Popular" category="popular" />
-        <TitleCards title="Top Rated" category="top_rated" />
-        <TitleCards title="Upcoming" category="upcoming" />
-        <TitleCards title="Now" category="now_playing" />
-      </div>
-      <Footer />
-    </div>
+    <>
+      {showSplash ? (
+        <div className="splash-screen">
+          <video
+            src={`/intro.mp4`}
+            autoPlay
+            muted
+            onEnded={() => setShowSplash(false)} // Transition on video end
+            style={{ width: "100vw", height: "100vh", objectFit: "cover" }}
+          />
+        </div>
+      ) : (
+        <div className="home">
+          <Navbar />
+          <Slides />
+          <div className="more-cards">
+            <TitleCards title="Popular" category="popular" />
+            <TitleCards title="Top Rated" category="top_rated" />
+            <TitleCards title="Upcoming" category="upcoming" />
+            <TitleCards title="Now" category="now_playing" />
+          </div>
+          <Footer />
+        </div>
+      )}
+    </>
   );
 };
 

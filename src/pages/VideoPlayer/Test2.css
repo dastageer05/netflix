@@ -24,7 +24,6 @@
   align-items: flex-start;
   justify-content: flex-end;
   color: white;
-  padding: 2rem;
   background-size: cover;
   background-position: center;
   text-shadow: 0px 2px 5px rgba(0, 0, 0, 0.7);
@@ -44,7 +43,8 @@
 
 .slide-content {
   position: relative;
-  z-index: 3; /* Ensure content is above the video */
+  z-index: 3;
+  padding: 3rem;
 }
 
 .hero-btns {
@@ -87,7 +87,7 @@
   background: rgba(0, 0, 0, 0.5);
   border: none;
   cursor: pointer;
-  padding: 1rem;
+  padding: 0.7rem;
   border-radius: 50%;
   color: white;
   z-index: 10;
@@ -95,7 +95,7 @@
 }
 
 .nav-button:hover {
-  background: rgba(255, 255, 255, 0.8);
+  background: rgba(187, 187, 187, 0.8);
   color: black;
   transform: translateY(-50%) scale(1.1);
 }

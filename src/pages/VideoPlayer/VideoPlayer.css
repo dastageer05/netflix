@@ -1,3 +1,6 @@
+* {
+  box-sizing: unset;
+}
 .preview-container {
   position: relative;
   width: 100%; /* Adjust to your needs */
@@ -6,6 +9,12 @@
   cursor: pointer;
 }
 
+/* .slider {
+  padding: 0;
+}
+.slide-content {
+  padding: 3.5rem;
+} */
 .thumbnail,
 .preview-video {
   position: absolute;
@@ -18,17 +27,41 @@
 }
 
 .thumbnail {
+  z-index: 1; /* Ensure thumbnail is initially visible */
   opacity: 1;
 }
 
 .preview-video {
+  z-index: 0; /* Video starts hidden */
   opacity: 0;
 }
 
 .preview-container:hover .thumbnail {
-  opacity: 0;
+  opacity: 0; /* Hide thumbnail on hover */
+  z-index: 0;
 }
 
 .preview-container:hover .preview-video {
-  opacity: 1;
+  opacity: 1; /* Show video on hover */
+  z-index: 1;
+}
+
+/* Overlay (Text Content) */
+.overlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  padding: 1rem;
+  background: linear-gradient(transparent, rgba(0, 0, 0, 0.8));
+  color: white;
+  z-index: 2; /* Always above thumbnail and video */
+  pointer-events: none; /* Prevent interaction issues */
+  transition: opacity 0.3s ease;
+  opacity: 1; /* Always visible */
+}
+
+/* Hover state for Overlay (optional, if you want changes on hover) */
+.preview-container:hover .overlay {
+  opacity: 1; /* Keep overlay visible */
 }
